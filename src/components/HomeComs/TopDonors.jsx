@@ -36,7 +36,7 @@ const TopDonors = () => {
           <Card i={i} key={i} />
         ))}
       </div>
-      <div className="mt-10 flex justify-end gap-8">
+      <div className="mt-10 flex justify-end gap-5">
         <button
           className="btn btn-neutral flex px-8 tooltip"
           data-tip=" View all donors"

@@ -20,7 +20,7 @@ const FAQs = [
 const Contact_Support = () => {
   return (
     <div className="container mx-auto p-6 text-center mt-20">
-      <h2 className="text-3xl font-bold mb-10">Contact & Supports</h2>
+      <h2 className="text-3xl font-bold mb-14">Contact & Supports</h2>
 
       <div className="flex justify-between gap-10 ">
         <div className="flex flex-col gap-6 w-[50%]">
@@ -37,8 +37,7 @@ const Contact_Support = () => {
         </div>
 
         <div className="w-full">
-          <h3 className="text-2xl font-semibold mb-4">FAQ (সাধারণ প্রশ্ন)</h3>
-
+          <h3 className="text-2xl font-semibold mb-4">FAQ</h3>
           <div>
             {FAQs.map((faq, i) => (
               <>

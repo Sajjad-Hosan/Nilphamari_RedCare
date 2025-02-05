@@ -3,6 +3,7 @@ import Root from "../pages/Root/Root";
 import Home from "../pages/Home/Home";
 import Donors from "../pages/Donors/Donors";
 import BeADonor from "../pages/BeADonor/BeADonor";
+import Login from "../pages/Login/Login";
 
 export const Routes = createBrowserRouter([
   {
@@ -22,5 +23,9 @@ export const Routes = createBrowserRouter([
         element: <BeADonor />,
       },
     ],
+  },
+  {
+    path: "/login",
+    element: <Login />,
   },
 ]);

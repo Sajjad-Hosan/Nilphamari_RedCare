@@ -49,11 +49,14 @@ const SuccessStories = () => {
   return (
     <div className="container mx-auto p-6 mt-20">
       <h2 className="text-3xl font-bold mb-6 text-center">
-      Blood donation story
+        Blood donation story
       </h2>
       <div className="grid md:grid-cols-2 gap-6 mt-10">
         {stories.map((item, index) => (
-          <div key={index} className="card border border-gray-200 p-6 rounded-lg">
+          <div
+            key={index}
+            className="card border border-gray-200 p-6 rounded-lg transition-all duration-100 hover:scale-95 cursor-pointer"
+          >
             <div className="flex items-center gap-5">
               <img
                 src="https://rukminim2.flixcart.com/image/850/1000/kvlaaa80/poster/c/5/e/medium-anime-boy-cool-anime-well-made-matte-finish-poster-original-imag8gayfhwhyuab.jpeg?q=90&crop=false"
@@ -74,10 +77,10 @@ const SuccessStories = () => {
           </div>
         ))}
       </div>
-      <div className="mt-10 flex justify-end gap-8">
+      <div className="mt-10 flex justify-end gap-5">
         <button
           className="btn btn-neutral flex px-8 tooltip"
-          data-tip=" View all donors"
+          data-tip=" See more stories"
         >
           <FaUsersViewfinder className="text-lg" />
         </button>
