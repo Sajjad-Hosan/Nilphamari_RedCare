@@ -59,7 +59,7 @@ const RulesModal = () => {
           <div className="flex justify-between items-center">
             <h3 className="font-bold text-lg">Donors Rules </h3>
           </div>
-          <div className="p-10 grid grid-cols-2 gap-3">
+          <div className="p-10 grid grid-cols-2 gap-3 overflow-scroll lg:h-[30rem]">
             <p className="font-semibold">Can Do</p>
             <p className="font-semibold">Can not Do</p>
             {donorEligibilityRules.map(({ canDo, cannotDo }, i) => (

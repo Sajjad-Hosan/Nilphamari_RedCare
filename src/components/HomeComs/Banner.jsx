@@ -1,7 +1,7 @@
-import { BiDonateBlood } from "react-icons/bi";
 import { FaUsersViewfinder } from "react-icons/fa6";
 import QuickFindModal from "./QuickFindModal";
 import { Link } from "react-router-dom";
+import { MdOutlineMedicalInformation } from "react-icons/md";
 
 const Banner = () => {
   return (
@@ -38,8 +38,9 @@ const Banner = () => {
               >
                 Quick Find Donors <FaUsersViewfinder className="text-lg" />
               </button>
-              <Link to={"/new-donor"} className="btn btn-outline ">
-                Be a Donor <BiDonateBlood className="text-lg" />
+              <button className="btn btn-neutral px-8">Donate Now</button>
+              <Link to={"/new-donor"} className="btn btn-outline" hidden={true}>
+                Be a Donor <MdOutlineMedicalInformation className="text-lg" />
               </Link>
             </div>
           </div>

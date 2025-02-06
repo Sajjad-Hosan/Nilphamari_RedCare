@@ -22,8 +22,8 @@ const Contact_Support = () => {
     <div className="container mx-auto p-6 text-center mt-20">
       <h2 className="text-3xl font-bold mb-14">Contact & Supports</h2>
 
-      <div className="flex justify-between gap-10 ">
-        <div className="flex flex-col gap-6 w-[50%]">
+      <div className="flex flex-col lg:flex-row justify-between gap-10 ">
+        <div className="flex flex-col gap-6 lg:w-[50%]">
           <div className="border border-gray-200 p-10 rounded-lg space-y-2">
             <h3 className="text-xl font-semibold">আমাদের অবস্থান</h3>
             <p className="text-sm text-gray-600">নিলফামারী সদর, বাংলাদেশ</p>

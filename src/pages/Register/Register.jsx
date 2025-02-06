@@ -53,7 +53,7 @@ const Register = () => {
                   <FaGithub className="text-lg text-black" />
                 </button>
                 <button
-                  className="btn btn-ghost flex tooltip"
+                  className="btn btn-ghost flex tooltip" 
                   data-tip="Twitter"
                 >
                   <FaTwitter className="text-lg text-blue-500" />

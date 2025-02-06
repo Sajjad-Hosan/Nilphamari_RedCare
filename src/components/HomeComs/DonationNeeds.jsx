@@ -1,3 +1,4 @@
+import { MdOutlinePersonSearch } from "react-icons/md";
 import Card from "../Shared/Card";
 
 const DonationNeeds = () => {
@@ -22,10 +23,17 @@ const DonationNeeds = () => {
           </select>
         </div>
       </div>
-      <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {[...Array(5).keys()].map((i) => (
-          <Card key={i} i={i} border="orange" type="need" />
-        ))}
+      <div className="flex flex-col">
+        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {[...Array(6).keys()].map((i) => (
+            <Card key={i} i={i} border="orange" type="need" />
+          ))}
+        </div>
+        <div className="mt-10 flex justify-end gap-5">
+          <button className="btn btn-neutral px-8">
+            <MdOutlinePersonSearch className="text-lg" /> View all donors
+          </button>
+        </div>
       </div>
     </div>
   );
