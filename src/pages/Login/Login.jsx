@@ -54,6 +54,17 @@ const Login = () => {
                 <p className="validator-hint hidden">
                   Must be more than 8 characters
                 </p>
+                <div className="flex items-center justify-between">
+                  <a className="link link-hover">Forgot password?</a>
+                  <label className="fieldset-label mt-2">
+                    <input
+                      type="checkbox"
+                      defaultChecked
+                      className="checkbox checkbox-xs"
+                    />
+                    Remember me
+                  </label>
+                </div>
                 <div className="flex justify-end mt-4">
                   <button className="btn btn-neutral px-6">
                     <CgLogIn className="text-lg" />

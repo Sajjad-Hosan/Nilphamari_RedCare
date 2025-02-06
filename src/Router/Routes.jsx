@@ -4,6 +4,7 @@ import Home from "../pages/Home/Home";
 import Donors from "../pages/Donors/Donors";
 import BeADonor from "../pages/BeADonor/BeADonor";
 import Login from "../pages/Login/Login";
+import Register from "../pages/Register/Register";
 
 export const Routes = createBrowserRouter([
   {
@@ -27,5 +28,9 @@ export const Routes = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
   },
 ]);
