@@ -77,6 +77,7 @@ const SuccessStories = () => {
           </div>
         ))}
       </div>
+      <p className="text-xs font-semibold text-right mt-4">Stories 100 of 08 showing</p>
       <div className="mt-10 flex justify-end gap-5">
         <button
           className="btn btn-neutral flex px-8 tooltip"

@@ -1,7 +1,9 @@
 import { MdOutlinePersonSearch } from "react-icons/md";
 import Card from "../Shared/Card";
+import EmptyCard from "../EmptyCard/EmptyCard";
 
 const DonationNeeds = () => {
+  const arrays = [...Array(0).keys()];
   return (
     <div className="px-4 mt-10">
       <div className="flex justify-between items-center gap-2">
@@ -24,13 +26,20 @@ const DonationNeeds = () => {
         </div>
       </div>
       <div className="flex flex-col">
-        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {[...Array(6).keys()].map((i) => (
-            <Card key={i} i={i} border="orange" type="need" />
-          ))}
-        </div>
+        {arrays.length > 0 ? (
+          <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {arrays.map((i) => (
+              <Card key={i} i={i} border="orange" type="need" />
+            ))}
+          </div>
+        ) : (
+          <EmptyCard />
+        )}
         <div className="mt-10 flex justify-end gap-5">
-          <button className="btn btn-neutral px-8">
+          <button
+            className="btn btn-neutral px-8"
+            disabled={arrays.length < 0 ? false : true}
+          >
             <MdOutlinePersonSearch className="text-lg" /> View all donors
           </button>
         </div>

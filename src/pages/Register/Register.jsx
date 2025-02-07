@@ -4,9 +4,16 @@ import { FaFacebook, FaGithub, FaGoogle, FaTwitter } from "react-icons/fa6";
 import { LuKeyRound, LuUserPlus, LuUserRound } from "react-icons/lu";
 import { MdOutlineAlternateEmail } from "react-icons/md";
 import image from "../../assets/login.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const navigate = useNavigate();
+  const handleNavigate = () => {
+    navigate("/set-profile");
+  };
+  const handleRegister = () => {
+    handleNavigate();
+  };
   return (
     <div className="max-w-6xl mx-auto p-10">
       <div className="card p-5">
@@ -53,7 +60,7 @@ const Register = () => {
                   <FaGithub className="text-lg text-black" />
                 </button>
                 <button
-                  className="btn btn-ghost flex tooltip" 
+                  className="btn btn-ghost flex tooltip"
                   data-tip="Twitter"
                 >
                   <FaTwitter className="text-lg text-blue-500" />
@@ -62,10 +69,13 @@ const Register = () => {
               <p className="text-center text-sm font-semibold my-8">
                 or Register with
               </p>
-              <form className="mt-8 flex flex-col gap-2">
+              <form
+                className="mt-8 flex flex-col gap-2"
+                onSubmit={handleRegister}
+              >
                 <label className="input validator w-full">
                   <LuUserRound className="text-lg" />
-                  <input type="email" placeholder="Name" required />
+                  <input type="text" placeholder="Name" required />
                 </label>
                 <label className="input validator w-full">
                   <MdOutlineAlternateEmail className="text-lg" />

@@ -1,7 +1,11 @@
 import { FaPersonCircleCheck, FaUsersViewfinder } from "react-icons/fa6";
 import Card from "../Shared/Card";
+import EmptyCard from "../EmptyCard/EmptyCard";
+import { MdOutlineMedicalInformation } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const TopDonors = () => {
+  const arrays = [...Array(0).keys()];
   return (
     <div className="flex flex-col gap-3 p-6 mt-24">
       <div className="flex justify-between items-center gap-2 px-4">
@@ -31,24 +35,32 @@ const TopDonors = () => {
           </select>
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
-        {[...Array(6).keys()].map((i) => (
-          <Card i={i} key={i} />
-        ))}
+      <div className="flex flex-col">
+        {arrays.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
+            {[...Array(6).keys()].map((i) => (
+              <Card i={i} key={i} />
+            ))}
+          </div>
+        ) : (
+          <EmptyCard />
+        )}
       </div>
       <div className="mt-10 flex justify-end gap-5">
         <button
           className="btn btn-neutral flex px-8 tooltip"
           data-tip=" View all donors"
+          disabled={arrays.length < 0 ? false : true}
         >
           <FaUsersViewfinder className="text-lg" />
         </button>
-        <button
-          className="btn btn-neutral flex px-8 tooltip"
-          data-tip="Be a donor"
+        <Link
+          to={"/new-donor"}
+          className="btn btn-neutral flex tooltip px-8"
+          data-tip="Be a Donor"
         >
-          <FaPersonCircleCheck className="text-lg" />
-        </button>
+          <MdOutlineMedicalInformation className="text-lg" />
+        </Link>
       </div>
     </div>
   );

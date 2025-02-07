@@ -6,9 +6,9 @@ const BeADonor = () => {
     <>
       <RulesModal />
       <div className="max-w-4xl mx-auto mt-8">
-        <div className="card bg-gray-400 p-10">
+        <div className="card p-10">
           <div className="flex justify-between items-center">
-            <p className="text-lg font-semibold">Be a donor</p>
+            <p className="text-2xl font-semibold">Be a donor</p>
             <div className="flex items-center gap-3">
               <button
                 className="btn btn-ghost flex tooltip"
@@ -21,7 +21,7 @@ const BeADonor = () => {
               </button>
             </div>
           </div>
-          <form className="flex flex-col gap-5 mt-6">
+          <form className="flex flex-col gap-5 mt-8">
             <div className="grid grid-cols-2 gap-5 w-full">
               <input type="file" className="file-input file-input-ghost" />
             </div>

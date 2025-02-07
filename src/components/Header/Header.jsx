@@ -1,9 +1,40 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import NotificationDrop from "../NotificationDrop/NotificationDrop";
 import { AiOutlineHome } from "react-icons/ai";
 import { TbInfoSquareRounded } from "react-icons/tb";
 import { HiOutlineUsers } from "react-icons/hi";
-import { LuLayoutDashboard } from "react-icons/lu";
+import {
+  LuLayoutDashboard,
+  LuUserPlus,
+  LuUserRound,
+  LuUserRoundX,
+} from "react-icons/lu";
+import { CgLogIn } from "react-icons/cg";
+
+const NotUser = () => {
+  return (
+    <>
+      <details className="dropdown dropdown-bottom dropdown-left">
+        <summary className="btn btn-circle btn-ghost">
+          <LuUserRoundX className="text-lg" />
+        </summary>
+        <div className="mt-6 menu dropdown-content bg-gray-300 rounded-box z-40 w-56 p-4">
+          <li>
+            <Link to={"/login"}>
+              {" "}
+              <CgLogIn className="text-lg" /> Login
+            </Link>
+          </li>
+          <li>
+            <Link to={"/register"}>
+              <LuUserPlus className="text-lg" /> Register
+            </Link>
+          </li>
+        </div>
+      </details>
+    </>
+  );
+};
 
 const MenuArrays = [
   {
@@ -24,10 +55,11 @@ const MenuArrays = [
 ];
 
 const Header = () => {
+  const isUser = true;
   return (
     <>
       <div className="navbar mb-4">
-        <div className="navbar-start">
+        <div className="navbar-start gap-2">
           <div className="dropdown lg:hidden">
             <div
               tabIndex={0}
@@ -65,7 +97,7 @@ const Header = () => {
             </ul>
           </div>
           <div>
-            <a className="btn btn-ghost text-xl dancing">
+            <a className="btn rounded-full btn-ghost text-xl dancing">
               Nilphamari VeinLink{" "}
             </a>
           </div>
@@ -83,7 +115,7 @@ const Header = () => {
           </ul>
         </div>
         <div className="navbar-end gap-2">
-          <form>
+          <form className="hidden md:flex">
             <label className="input rounded-full">
               <svg
                 className="h-[1em] opacity-50"
@@ -111,6 +143,17 @@ const Header = () => {
           >
             <LuLayoutDashboard className="text-lg" />
           </button>
+          {isUser === true ? (
+            <Link
+              to={"/profile"}
+              className="btn btn-circle btn-ghost flex tooltip tooltip-bottom"
+              data-tip="Profile"
+            >
+              <LuUserRound className="text-lg " />
+            </Link>
+          ) : (
+            <NotUser />
+          )}
         </div>
       </div>
     </>

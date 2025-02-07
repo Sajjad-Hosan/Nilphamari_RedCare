@@ -56,6 +56,14 @@ const QuickFindModal = () => {
               </div>
             </form>
           </div>
+          <div className="flex items-center justify-end gap-3">
+            <button className="btn btn-neutral btn-sm px-8" disabled>
+              Emergency Blood
+            </button>
+            <button className="btn btn-neutral btn-sm px-8" disabled>
+              Camping Blood
+            </button>
+          </div>
         </div>
       </dialog>
     </>
