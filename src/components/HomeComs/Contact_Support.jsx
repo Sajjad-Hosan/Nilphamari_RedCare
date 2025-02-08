@@ -1,19 +1,28 @@
 const FAQs = [
   {
-    question: "আমি কিভাবে রক্তদাতা খুঁজবো?",
+    question: "Who is eligible to donate blood?",
     answer:
-      "নিলফামারী সদরের দর্শনে রক্তদাতার নাম, ইংরেজীতের অবস্থান, ইংরেজীতের জন্য ফোন নম্বার, ইমেইল ঠিকানা, �বস্থান মানচিত্র এবং রক্তদাতার ছবি দেওয়া আছে।",
+      "People who are between the ages of 18 and 60, weigh at least 45 kg, are in good health, and have not donated blood in the last three months are eligible to donate blood.",
   },
   {
-    question: "আমি কিভাবে রক্তদানে যোগ দিতে পারি?",
+    question: "How often can I donate blood?",
     answer:
-      "রক্তদানের জন্য ফোন নম্বার দিয়ে রক্তদান করতে পারেন। রক্তদানের জন্য ফোন নম্বার দিয়ে রক্ত দান করতে পারেন। রক্ত দান করতে পারেন।",
+      "You can donate whole blood every three months. Platelet and plasma donations can be done more frequently, depending on the specific requirements and guidelines.",
   },
-
   {
-    question: "��মি কি��াবে ��ক্তদানের ��বি দে��য়া আছে?",
+    question: "What happens during the blood donation process?",
     answer:
-      "রক্তদানের ��ন্য ��োন নম্বার দিয়ে ��ক্তদান করতে পারেন। ��ক্তদানের ��ন্য ��োন নম্বার দিয়ে ��ক্ত দান করতে পারেন। ��ক্ত দান করতে পারেন।",
+      "The donation process takes about 30-45 minutes. It involves a quick health check-up, blood collection, and a short rest after donating. The actual blood collection takes around 10-15 minutes.",
+  },
+  {
+    question: "Is blood donation safe?",
+    answer:
+      "Yes, blood donation is a safe procedure. All equipment used is sterile and disposed of after each donation. You will be monitored throughout the process to ensure your comfort and safety.",
+  },
+  {
+    question: "What should I do after donating blood?",
+    answer:
+      "After donating blood, rest for a few minutes, drink plenty of fluids, and eat a snack. Avoid heavy exercise or strenuous activity for the rest of the day.",
   },
 ];
 
@@ -26,12 +35,12 @@ const Contact_Support = () => {
         <div className="flex flex-col gap-6 lg:w-[50%]">
           <div className="border border-gray-200 p-10 rounded-lg space-y-2">
             <h3 className="text-xl font-semibold">আমাদের অবস্থান</h3>
-            <p className="text-sm text-gray-600">নিলফামারী সদর, বাংলাদেশ</p>
+            <p className="text-sm text-gray-600">নীলফামারী সদর, রংপুর</p>
           </div>
 
           <div className="border border-gray-200 p-10 rounded-lg space-y-2">
             <h3 className="text-xl font-semibold">জরুরি যোগাযোগ</h3>
-            <p className="text-sm text-gray-600">হেল্পলাইন: ০১৭XXXXXXXX</p>
+            <p className="text-sm text-gray-600">হেল্পলাইন: ০১৭*******</p>
             <p className="text-sm text-gray-600">ইমেইল: support@example.com</p>
           </div>
         </div>

@@ -7,14 +7,23 @@ function About() {
     <div className="p-10">
       {/* Hero Section */}
       <section className="text-center p-8">
-        <h1 className="text-4xl font-bold mb-4">
-          Welcome to Nilphamari VeinLink
+        <img
+          src="/logo.png"
+          alt="Nilphamari RedCare"
+          width={180}
+          className="object-contain mx-auto mb-2"
+        />
+        <h1 className="text-3xl font-semibold mb-4">
+          Welcome to <br /> <span className=" mt-2 text-5xl font-bold dancing">Nilphamari RedCare</span>{" "}
         </h1>
         <p className="text-xl max-w-2xl mx-auto mb-6">
           Join us in making a difference by donating blood and saving lives.
           Every donation counts!
         </p>
-        <button className="btn btn-primary text-white px-6 py-2 rounded-full text-lg" disabled>
+        <button
+          className="btn btn-primary text-white px-6 py-2 rounded-full text-lg"
+          disabled
+        >
           Learn More
         </button>
       </section>

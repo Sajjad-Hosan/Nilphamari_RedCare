@@ -14,7 +14,7 @@ const Banner = () => {
             <p className="mt-5">
               Welcome to{" "}
               <span className="text-bold text-orange-500 text-xl">
-                Nilphamari VeinLink
+                Nilphamari RedCare
               </span>
               . Where you can <span className="text-orange-500">easily</span>{" "}
               find blood donors in{" "}
@@ -26,7 +26,7 @@ const Banner = () => {
               in urgent need and be a part of this humanitarian mission.
             </p>
             <p className="mt-3 font-semibold text-lg dancing text-orange-500">
-              Nilphamari VeinLink – Connecting Lives, Saving Lives
+              Nilphamari RedCare– Connecting Lives, Saving Lives
             </p>
 
             <div className="flex justify-end items-center gap-3 mt-10">

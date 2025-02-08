@@ -1,4 +1,4 @@
-import { FaPersonCircleCheck, FaUsersViewfinder } from "react-icons/fa6";
+import { FaUsersViewfinder } from "react-icons/fa6";
 import Card from "../Shared/Card";
 import EmptyCard from "../EmptyCard/EmptyCard";
 import { MdOutlineMedicalInformation } from "react-icons/md";

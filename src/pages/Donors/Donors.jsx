@@ -5,8 +5,62 @@ import { GrFormView } from "react-icons/gr";
 import { IoRefresh } from "react-icons/io5";
 import { LuMessageCircle, LuSend } from "react-icons/lu";
 import { MdOutlineContacts } from "react-icons/md";
+import EmptyCard from "../../components/EmptyCard/EmptyCard";
+import ViewDropDown from "../../components/DonorCom/ViewDropDown";
+
+const DonorCard = () => {
+  return (
+    <div className="p-10 card flex-row items-center gap-5 bg-gray-200 relative">
+      <div className="badge badge-neutral absolute top-5 right-5 font-semibold">
+        Active
+      </div>
+      <div className="flex flex-col gap-3">
+        <img
+          src="https://rukminim2.flixcart.com/image/850/1000/kvlaaa80/poster/c/5/e/medium-anime-boy-cool-anime-well-made-matte-finish-poster-original-imag8gayfhwhyuab.jpeg?q=90&crop=false"
+          alt=""
+          width={150}
+          className="avatar rounded-full"
+        />
+      </div>
+      <div className="flex flex-col gap-1">
+        <h3 className="text-xl font-semibold">Donor Name</h3>
+        <span className="text-sm text-gray-700">Blood Group: A+</span>
+        <p className="text-sm text-gray-700">Location: Nilphamari</p>
+        <p className="text-sm text-gray-700">Last Donated: 2022-01-15</p>
+      </div>
+      <div className="flex items-center gap-3 absolute right-4 bottom-3">
+        <button
+          className="btn btn-ghost btn-circle flex tooltip"
+          data-tip="View"
+        >
+          <GrFormView className="text-lg" />
+        </button>
+        <button
+          className="btn btn-ghost btn-circle flex tooltip"
+          data-tip="Message"
+        >
+          <LuMessageCircle className="text-lg" />
+        </button>
+        <button
+          className="btn btn-ghost btn-circle flex tooltip"
+          data-tip="Contact"
+        >
+          <MdOutlineContacts className="text-lg" />
+        </button>
+        <button
+          className="btn btn-ghost btn-circle flex tooltip"
+          data-tip="Request Send"
+        >
+          <LuSend className="text-lg" />
+        </button>
+      </div>
+    </div>
+  );
+};
 
 const Donors = () => {
+  const arrays = [...Array(0).keys()];
+  const isDonor = true;
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
@@ -28,15 +82,11 @@ const Donors = () => {
           <button
             className="btn btn-circle btn-ghost flex tooltip"
             data-tip="New Donor"
+            disabled={isDonor}
           >
             <BsPersonPlus className="text-lg" />
           </button>
-          <button
-            className="btn btn-circle btn-ghost flex tooltip"
-            data-tip="Page View"
-          >
-            <BiCustomize className="text-lg" />
-          </button>
+          <ViewDropDown />
         </div>
       </div>
       <div className="flex justify-between items-center mt-10">
@@ -85,72 +135,31 @@ const Donors = () => {
         </div>
       </div>
       <div className="mt-10">
-        <div className="grid grid-cols-2 gap-5">
-          {[...Array(10).keys()].map((i) => (
-            <div
-              key={i}
-              className="p-10 card flex-row items-center gap-5 bg-gray-200 relative"
-            >
-              <div className="badge badge-neutral absolute top-5 right-5 font-semibold">
-                Active
-              </div>
-              <div className="flex flex-col gap-3">
-                <img
-                  src="https://rukminim2.flixcart.com/image/850/1000/kvlaaa80/poster/c/5/e/medium-anime-boy-cool-anime-well-made-matte-finish-poster-original-imag8gayfhwhyuab.jpeg?q=90&crop=false"
-                  alt=""
-                  width={150}
-                  className="avatar rounded-full"
-                />
-              </div>
-              <div className="flex flex-col gap-1">
-                <h3 className="text-xl font-semibold">Donor Name</h3>
-                <span className="text-sm text-gray-700">Blood Group: A+</span>
-                <p className="text-sm text-gray-700">Location: Nilphamari</p>
-                <p className="text-sm text-gray-700">
-                  Last Donated: 2022-01-15
-                </p>
-              </div>
-              <div className="flex items-center gap-3 absolute right-4 bottom-3">
-                <button
-                  className="btn btn-ghost btn-circle flex tooltip"
-                  data-tip="View"
-                >
-                  <GrFormView className="text-lg" />
-                </button>
-                <button
-                  className="btn btn-ghost btn-circle flex tooltip"
-                  data-tip="Message"
-                >
-                  <LuMessageCircle className="text-lg" />
-                </button>
-                <button
-                  className="btn btn-ghost btn-circle flex tooltip"
-                  data-tip="Contact"
-                >
-                  <MdOutlineContacts className="text-lg" />
-                </button>
-                <button
-                  className="btn btn-ghost btn-circle flex tooltip"
-                  data-tip="Request Send"
-                >
-                  <LuSend className="text-lg" />
-                </button>
-              </div>
+        {arrays.length > 0 ? (
+          <>
+            <div className="grid grid-cols-2 gap-5">
+              {arrays.map((i) => (
+                <DonorCard key={i} />
+              ))}
             </div>
-          ))}
-        </div>
-        <div className="flex items-center justify-center mt-16">
-          <button
-            className="btn btn-neutral px-8"
-            onClick={() => setLoading(!loading)}
-          >
-            {loading ? (
-              <span className="loading loading-dots loading-xs"></span>
-            ) : (
-              "Load More"
-            )}
-          </button>
-        </div>
+            <div className="flex items-center justify-center mt-16">
+              <button
+                className="btn btn-neutral px-8"
+                onClick={() => setLoading(!loading)}
+              >
+                {loading ? (
+                  <span className="loading loading-dots loading-xs"></span>
+                ) : (
+                  "Load More"
+                )}
+              </button>
+            </div>
+          </>
+        ) : (
+          <div className="flex items-center">
+            <EmptyCard />
+          </div>
+        )}
       </div>
     </div>
   );

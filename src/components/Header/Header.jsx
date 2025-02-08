@@ -97,9 +97,13 @@ const Header = () => {
             </ul>
           </div>
           <div>
-            <a className="btn rounded-full btn-ghost text-xl dancing">
-              Nilphamari VeinLink{" "}
-            </a>
+            <Link
+              to={"/"}
+              className="btn rounded-full btn-ghost text-xl dancing items-center"
+            >
+              <img src="/logo.png" alt="Nilphamari RedCare" width={40} />
+              Nilphamari RedCare
+            </Link>
           </div>
         </div>
         <div className="navbar-center hidden lg:flex">
