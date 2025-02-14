@@ -4,7 +4,7 @@ import { FaFacebook, FaGithub, FaGoogle, FaTwitter } from "react-icons/fa6";
 import { LuKeyRound, LuUserPlus } from "react-icons/lu";
 import { MdOutlineAlternateEmail } from "react-icons/md";
 import image from "../../assets/login.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { useForm } from "react-hook-form";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
@@ -14,6 +14,7 @@ const Login = () => {
   const { register, handleSubmit } = useForm();
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
+  const { state } = useLocation();
 
   const handleLogin = (e) => {
     handleFirebaseLogin(e.email, e.password).then(async (res) => {
@@ -23,7 +24,7 @@ const Login = () => {
       };
       const result = await axiosPublic.post("/login", data);
       console.log(result);
-      navigate("/");
+      navigate(state || "/");
     });
   };
 

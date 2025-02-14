@@ -1,10 +1,15 @@
 import { IoClose } from "react-icons/io5";
 import { TbLogout2 } from "react-icons/tb";
 import { TiInfoOutline } from "react-icons/ti";
+import useAuth from "../../hooks/useAuth";
 
 const LogoutModal = () => {
+  const { handleFirebaseLogout } = useAuth();
   const handleLogout = () => {
-    localStorage.setItem("showWelcomeAlert", "true");
+    handleFirebaseLogout(() => {
+      localStorage.setItem("showWelcomeAlert", "true");
+      alert("You have logout!");
+    });
   };
   return (
     <>
@@ -21,7 +26,10 @@ const LogoutModal = () => {
                   <IoClose className="text-lg" /> Deny
                 </button>
               </form>
-              <button className="btn btn-sm btn-neutral px-4">
+              <button
+                className="btn btn-sm btn-neutral px-4"
+                onClick={handleLogout}
+              >
                 <TbLogout2 className="text-lg" /> Logout
               </button>
             </div>

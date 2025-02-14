@@ -9,6 +9,7 @@ import About from "../pages/About/About";
 import SetProfile from "../pages/Register/SetProfile";
 import ProfilePage from "../pages/Profile/Profile";
 import ForgotPass from "../pages/Login/ForgotPass";
+import IsUser from "../PrivateRoutes/IsUser";
 
 export const Routes = createBrowserRouter([
   {
@@ -33,7 +34,11 @@ export const Routes = createBrowserRouter([
       },
       {
         path: "/profile",
-        element: <ProfilePage />,
+        element: (
+          <IsUser>
+            <ProfilePage />
+          </IsUser>
+        ),
       },
       {
         path: "/forgot-password",

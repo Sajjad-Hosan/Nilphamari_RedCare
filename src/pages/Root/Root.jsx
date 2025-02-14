@@ -15,7 +15,7 @@ const Root = () => {
       {/*  */}
       <WelcomeAlert />
       <LogoutModal />
-      <Alerts />
+      {/* <Alerts /> */}
     </div>
   );
 };
