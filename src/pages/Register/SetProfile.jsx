@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaArrowRightToBracket, FaRegCircleCheck } from "react-icons/fa6";
 import {
   GrContactInfo,
@@ -6,6 +6,11 @@ import {
   GrFormPreviousLink,
 } from "react-icons/gr";
 import { Link } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import { useForm } from "react-hook-form";
+import useImage from "../../hooks/useImage";
+import { updateProfile } from "firebase/auth";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const timelineObj = [
   { tab: 0, name: "register" },
@@ -14,7 +19,41 @@ const timelineObj = [
 ];
 
 const SetProfile = () => {
+  const { register, handleSubmit } = useForm();
+  const { imageUrl, handleImageData } = useImage();
+
+  const { user, mgUser } = useAuth();
+  const axiosPublic = useAxiosPublic();
   const [activeTab, setActiveTab] = useState(0);
+  const { displayName, email, reloadUserInfo, metadata } = user;
+  const {
+    _id,
+    role,
+    name,
+    password,
+    emailVerified,
+    creationTime,
+    lastSignInTime,
+    donates,
+    friends,
+    posts,
+    reacts,
+    comments,
+    blocks,
+    messages,
+    isDonor,
+    about,
+    address,
+    bloodGroup,
+    age,
+    city,
+    district,
+    donation_related_info,
+    phone,
+    photoURL,
+    userName,
+    weight,
+  } = mgUser;
 
   const handleNext = () => {
     if (activeTab < timelineObj.length - 1) {
@@ -26,6 +65,37 @@ const SetProfile = () => {
     if (activeTab > 0) {
       setActiveTab(activeTab - 1);
     }
+  };
+
+  const handleDonor = async (e) => {
+    const img = e.image[0];
+    console.log(e.image[0]);
+    handleImageData(img);
+    if (!imageUrl) {
+      return console.log("something went wrong!");
+    }
+    const donor = {
+      photoURL: imageUrl,
+      _id: mgUser._id,
+      userName: e.userName,
+      email: user.email,
+      bloodGroup: e.blood_group,
+      phone: e.phone,
+      city: e.city,
+      address: e.address,
+      district: e.district,
+      weight: e.weight,
+      age: e.age,
+      about: e.about,
+      donation_related_info: e.donation_related_info,
+    };
+    updateProfile(user, {
+      photoURL: imageUrl,
+    }).then(async () => {
+      const res = await axiosPublic.patch("/new-donor", donor);
+      console.log(res.data);
+      handleNext();
+    });
   };
 
   return (
@@ -69,34 +139,38 @@ const SetProfile = () => {
                   <label htmlFor="" className="text-xl">
                     Name:{" "}
                   </label>
-                  <p className="text-md font-semibold mt-1">Md. Sajjad Hosan</p>
+                  <p className="text-md font-semibold mt-1">{displayName}</p>
                 </div>
                 <div className="flex items-center gap-3">
                   <label htmlFor="" className="text-xl">
                     Email:{" "}
                   </label>
-                  <p className="text-md font-semibold mt-1">
-                    mdsajjadhosan@gmail.com
-                  </p>
+                  <p className="text-md font-semibold mt-1">{email}</p>
                 </div>
                 <div className="flex items-center gap-3">
                   <label htmlFor="" className="text-xl">
                     Password:{" "}
                   </label>
-                  <p className="text-md font-semibold mt-1">******345</p>
+                  <p className="text-md font-semibold mt-1">
+                    {reloadUserInfo?.passwordHash}
+                  </p>
                 </div>
                 <div className="flex items-center gap-3">
                   <label htmlFor="" className="text-xl">
-                    Create time:{" "}
+                    Creation time:{" "}
                   </label>
-                  <p className="text-md font-semibold mt-1">12:01:05 am</p>
+                  <p className="text-md font-semibold mt-1">
+                    {metadata?.creationTime}
+                  </p>
                 </div>
-                <div className="flex items-center gap-3">
+                {/* <div className="flex items-center gap-3">
                   <label htmlFor="" className="text-xl">
                     Create date:{" "}
                   </label>
-                  <p className="text-md font-semibold mt-1">12 Jun, 2025</p>
-                </div>
+                  <p className="text-md font-semibold mt-1">
+                    {metadata.creationTime}
+                  </p>
+                </div> */}
               </div>
               <div className="flex justify-end items-center gap-4 mt-10">
                 <button
@@ -128,18 +202,30 @@ const SetProfile = () => {
           {activeTab === 1 && (
             <>
               <p className="font-semibold text-xl">Donor Form</p>
-              <form action="" className="flex flex-col gap-3 mt-8">
-                <input type="file" name="" id="" className="file-input" />
+              <form
+                action=""
+                className="flex flex-col gap-3 mt-8"
+                onSubmit={handleSubmit(handleDonor)}
+              >
+                <input
+                  type="file"
+                  name=""
+                  id=""
+                  className="file-input"
+                  {...register("image")}
+                />
                 <div className="grid grid-cols-2 gap-5">
                   <input
                     type="text"
                     className="input input-bordered"
                     placeholder="Username"
+                    {...register("userName")}
                   />
                   <input
                     type="text"
                     className="input input-bordered"
                     placeholder="Address"
+                    {...register("address")}
                   />
                 </div>
                 <div className="grid grid-cols-2 gap-5">
@@ -147,11 +233,13 @@ const SetProfile = () => {
                     type="text"
                     className="input input-bordered"
                     placeholder="City"
+                    {...register("city")}
                   />
                   <input
                     type="text"
                     className="input input-bordered"
                     placeholder="District"
+                    {...register("district")}
                   />
                 </div>
                 <div className="grid grid-cols-2 gap-5">
@@ -159,11 +247,13 @@ const SetProfile = () => {
                     type="text"
                     className="input input-bordered"
                     placeholder="Age"
+                    {...register("age")}
                   />
                   <input
                     type="text"
                     className="input input-bordered"
                     placeholder="Weight"
+                    {...register("weight")}
                   />
                 </div>
                 <div className="grid grid-cols-2 gap-5">
@@ -171,6 +261,7 @@ const SetProfile = () => {
                     id="blood-group"
                     name="blood-group"
                     className="select"
+                    {...register("blood_group")}
                   >
                     <option selected disabled>
                       Choose blood group
@@ -188,6 +279,7 @@ const SetProfile = () => {
                     type="text"
                     className="input input-bordered"
                     placeholder="Phone +880"
+                    {...register("phone")}
                   />
                 </div>
                 <textarea
@@ -195,12 +287,14 @@ const SetProfile = () => {
                   id=""
                   className="textarea w-full"
                   placeholder="About you"
+                  {...register("about")}
                 ></textarea>
                 <textarea
                   name=""
                   id=""
                   className="textarea w-full"
                   placeholder="Donation related any information"
+                  {...register("donation_related_info")}
                 ></textarea>
                 <div className="mt-6 flex justify-end items-center gap-3">
                   <button
@@ -221,7 +315,7 @@ const SetProfile = () => {
                         ? "opacity-50 cursor-not-allowed"
                         : ""
                     }`}
-                    onClick={handleNext}
+                    // onClick={handleNext}
                     disabled={activeTab === timelineObj.length - 1}
                   >
                     <GrContactInfo className="text-lg" />
@@ -237,22 +331,20 @@ const SetProfile = () => {
               <p className="font-semibold text-xl">Profile Setup</p>
               <div className="flex gap-3 mt-6">
                 <img
-                  src="https://rukminim2.flixcart.com/image/850/1000/kvlaaa80/poster/c/5/e/medium-anime-boy-cool-anime-well-made-matte-finish-poster-original-imag8gayfhwhyuab.jpeg?q=90&crop=false"
-                  alt=""
+                  src={photoURL}
+                  alt={name}
                   className="avatar rounded-full border border-gray-300 object-contain"
                   width={250}
                 />
                 <div className="mt-6 p-6 text-left w-full">
-                  <p className="text-2xl font-semibold">Md. Sajjad Hosan</p>
+                  <p className="text-2xl font-semibold">{name}</p>
                   <p className="text-md font-normal text-gray-400">
-                    sajjad0hosan
+                    {userName}
                   </p>
                   <div className="mt-8">
-                    <p className="font-semibold">
-                      Email: sajjadhosan@gmail.com
-                    </p>
-                    <p className="font-semibold">Phone: +88011254585</p>
-                    <p className="font-semibold">Blood Group: A+</p>
+                    <p className="font-semibold">Email: {email}</p>
+                    <p className="font-semibold">Phone: {phone}</p>
+                    <p className="font-semibold">Blood Group: {bloodGroup}</p>
                   </div>
                 </div>
               </div>

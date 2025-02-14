@@ -10,6 +10,8 @@ import {
   LuUserRoundX,
 } from "react-icons/lu";
 import { CgLogIn } from "react-icons/cg";
+import useAuth from "../../hooks/useAuth";
+import SearchBoxResultModal from "./SearchBoxResultModal";
 
 const NotUser = () => {
   return (
@@ -55,9 +57,15 @@ const MenuArrays = [
 ];
 
 const Header = () => {
-  const isUser = true;
+  const { user } = useAuth();
+  const handleSearchResult = (e) => {
+    e.preventDefault();
+
+    document.getElementById("search_box_modal").showModal();
+  };
   return (
     <>
+      <SearchBoxResultModal />
       <div className="navbar mb-4">
         <div className="navbar-start gap-2">
           <div className="dropdown lg:hidden">
@@ -119,7 +127,7 @@ const Header = () => {
           </ul>
         </div>
         <div className="navbar-end gap-2">
-          <form className="hidden md:flex">
+          <form className="hidden md:flex" onSubmit={handleSearchResult}>
             <label className="input rounded-full">
               <svg
                 className="h-[1em] opacity-50"
@@ -137,7 +145,12 @@ const Header = () => {
                   <path d="m21 21-4.3-4.3"></path>
                 </g>
               </svg>
-              <input type="search" required placeholder="Search" />
+              <input
+                type="search"
+                required
+                placeholder="Search"
+                name="search"
+              />
             </label>
           </form>
           <NotificationDrop />
@@ -147,7 +160,7 @@ const Header = () => {
           >
             <LuLayoutDashboard className="text-lg" />
           </button>
-          {isUser === true ? (
+          {!!user === true ? (
             <Link
               to={"/profile"}
               className="btn btn-circle btn-ghost flex tooltip tooltip-bottom"

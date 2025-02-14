@@ -8,6 +8,7 @@ import Register from "../pages/Register/Register";
 import About from "../pages/About/About";
 import SetProfile from "../pages/Register/SetProfile";
 import ProfilePage from "../pages/Profile/Profile";
+import ForgotPass from "../pages/Login/ForgotPass";
 
 export const Routes = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ export const Routes = createBrowserRouter([
       {
         path: "/profile",
         element: <ProfilePage />,
+      },
+      {
+        path: "/forgot-password",
+        element: <ForgotPass />,
       },
     ],
   },

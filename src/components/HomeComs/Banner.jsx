@@ -10,8 +10,8 @@ const Banner = () => {
       <div className="hero bg-base-100 h-[35rem]">
         <div className="hero-content text-center">
           <div className="max-w-3xl">
-            <h1 className="text-6xl font-semibold">Assalamu Alaikum,</h1>
-            <p className="mt-5">
+            <h1 className="text-5xl md:text-6xl font-semibold">Assalamu Alaikum,</h1>
+            <p className="mt-5 text-sm md:text-md">
               Welcome to{" "}
               <span className="text-bold text-orange-500 text-xl">
                 Nilphamari RedCare

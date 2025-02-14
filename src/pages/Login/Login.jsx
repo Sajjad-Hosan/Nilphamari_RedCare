@@ -4,9 +4,29 @@ import { FaFacebook, FaGithub, FaGoogle, FaTwitter } from "react-icons/fa6";
 import { LuKeyRound, LuUserPlus } from "react-icons/lu";
 import { MdOutlineAlternateEmail } from "react-icons/md";
 import image from "../../assets/login.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import { useForm } from "react-hook-form";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const Login = () => {
+  const { handleFirebaseLogin } = useAuth();
+  const { register, handleSubmit } = useForm();
+  const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
+
+  const handleLogin = (e) => {
+    handleFirebaseLogin(e.email, e.password).then(async (res) => {
+      const data = {
+        email: e.email,
+        lastSignInTime: res.user?.metadata?.lastSignInTime,
+      };
+      const result = await axiosPublic.post("/login", data);
+      console.log(result);
+      navigate("/");
+    });
+  };
+
   return (
     <div className="max-w-6xl mx-auto p-10">
       <div className="card p-5">
@@ -33,14 +53,21 @@ const Login = () => {
               </p>
             </div>
             <div className="mt-5">
-              <form className="mt-8 flex flex-col gap-2">
+              <form
+                className="mt-8 flex flex-col gap-2"
+                onSubmit={handleSubmit(handleLogin)}
+              >
                 <label className="input validator w-full">
                   <MdOutlineAlternateEmail className="text-lg" />
-                  <input type="email" placeholder="Email" required />
+                  <input
+                    type="email"
+                    placeholder="Email"
+                    {...register("email", { required: true })}
+                  />
                 </label>
-                <div className="validator-hint hidden">
+                <p className="validator-hint hidden">
                   Enter valid email address
-                </div>
+                </p>
                 <label className="input validator w-full">
                   <LuKeyRound className="text-lg" />
                   <input
@@ -48,14 +75,17 @@ const Login = () => {
                     required
                     placeholder="Password"
                     minLength="8"
-                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                    // pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                    {...register("password", { required: true })}
                   />
                 </label>
                 <p className="validator-hint hidden">
                   Must be more than 8 characters
                 </p>
                 <div className="flex items-center justify-between">
-                  <a className="link link-hover">Forgot password?</a>
+                  <Link to={"/forgot-password"} className="link link-hover">
+                    Forgot password?
+                  </Link>
                   <label className="fieldset-label mt-2">
                     <input
                       type="checkbox"

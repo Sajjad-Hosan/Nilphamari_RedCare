@@ -5,14 +5,52 @@ import { LuKeyRound, LuUserPlus, LuUserRound } from "react-icons/lu";
 import { MdOutlineAlternateEmail } from "react-icons/md";
 import image from "../../assets/login.png";
 import { Link, useNavigate } from "react-router-dom";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import { useForm } from "react-hook-form";
+import useAuth from "../../hooks/useAuth";
+import { updateProfile } from "firebase/auth";
 
 const Register = () => {
+  const { handleFirebaseRegister } = useAuth();
+  const AxiosPublic = useAxiosPublic();
+  const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
   const handleNavigate = () => {
     navigate("/set-profile");
   };
-  const handleRegister = () => {
-    handleNavigate();
+  const handleRegister = (e) => {
+    // handleNavigate();
+
+    handleFirebaseRegister(e.email, e.password).then((re) => {
+      console.log("firebase", re.user);
+      updateProfile(re.user, {
+        displayName: e.name,
+      }).then(async () => {
+        console.log();
+        const userData = {
+          role: "user",
+          name: e.name,
+          email: e.email,
+          password: e.password,
+          emailVerified: re.user?.emailVerified,
+          creationTime: re.user?.metadata?.creationTime,
+          lastSignInTime: re.user?.metadata?.lastSignInTime,
+          token: re.user?._tokenResponse?.idToken,
+          donates: [],
+          friends: [],
+          posts: [],
+          reacts: [],
+          comments: [],
+          blocks: [],
+          messages: [],
+          isDonor: false,
+          accept_all_terms_conditions: true,
+        };
+        const res = await AxiosPublic.post("/register", userData);
+        console.log(res.data);
+        navigate("/set-profile");
+      });
+    });
   };
   return (
     <div className="max-w-6xl mx-auto p-10">
@@ -71,15 +109,25 @@ const Register = () => {
               </p>
               <form
                 className="mt-8 flex flex-col gap-2"
-                onSubmit={handleRegister}
+                onSubmit={handleSubmit(handleRegister)}
               >
                 <label className="input validator w-full">
                   <LuUserRound className="text-lg" />
-                  <input type="text" placeholder="Name" required />
+                  <input
+                    type="text"
+                    placeholder="Name"
+                    {...register("name", { required: true })}
+                  />
                 </label>
+                <div className="validator-hint hidden">Enter valid name</div>
                 <label className="input validator w-full">
                   <MdOutlineAlternateEmail className="text-lg" />
-                  <input type="email" placeholder="Email" required />
+                  <input
+                    type="email"
+                    placeholder="Email"
+                    required
+                    {...register("email", { required: true })}
+                  />
                 </label>
                 <div className="validator-hint hidden">
                   Enter valid email address
@@ -91,7 +139,8 @@ const Register = () => {
                     required
                     placeholder="Password"
                     minLength="8"
-                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                    // pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                    {...register("password", { required: true })}
                   />
                 </label>
                 <p className="validator-hint hidden">
@@ -102,6 +151,7 @@ const Register = () => {
                     type="checkbox"
                     defaultChecked
                     className="checkbox checkbox-xs"
+                    {...register("terms", { required: true })}
                   />
                   I agree to the terms and conditions
                 </label>

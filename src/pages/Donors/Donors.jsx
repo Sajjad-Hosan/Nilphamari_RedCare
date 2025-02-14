@@ -7,6 +7,7 @@ import { LuMessageCircle, LuSend } from "react-icons/lu";
 import { MdOutlineContacts } from "react-icons/md";
 import EmptyCard from "../../components/EmptyCard/EmptyCard";
 import ViewDropDown from "../../components/DonorCom/ViewDropDown";
+import useDonors from "../../hooks/useDonors";
 
 const DonorCard = () => {
   return (
@@ -59,7 +60,8 @@ const DonorCard = () => {
 };
 
 const Donors = () => {
-  const arrays = [...Array(0).keys()];
+  const { data } = useDonors();
+  console.log(data);
   const isDonor = true;
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -135,10 +137,10 @@ const Donors = () => {
         </div>
       </div>
       <div className="mt-10">
-        {arrays.length > 0 ? (
+        {data.length > 0 ? (
           <>
             <div className="grid grid-cols-2 gap-5">
-              {arrays.map((i) => (
+              {data.map((i) => (
                 <DonorCard key={i} />
               ))}
             </div>

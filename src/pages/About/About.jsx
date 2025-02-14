@@ -6,17 +6,17 @@ function About() {
   return (
     <div className="p-10">
       {/* Hero Section */}
-      <section className="text-center p-8">
+      <section className="text-center md:p-8">
         <img
           src="/logo.png"
           alt="Nilphamari RedCare"
           width={180}
           className="object-contain mx-auto mb-2"
         />
-        <h1 className="text-3xl font-semibold mb-4">
-          Welcome to <br /> <span className=" mt-2 text-5xl font-bold dancing">Nilphamari RedCare</span>{" "}
+        <h1 className="text-lg md:text-3xl font-semibold mb-4">
+          Welcome to <br /> <span className=" mt-2 text-3xl md:text-5xl font-bold dancing">Nilphamari RedCare</span>{" "}
         </h1>
-        <p className="text-xl max-w-2xl mx-auto mb-6">
+        <p className="text-xl mb-6">
           Join us in making a difference by donating blood and saving lives.
           Every donation counts!
         </p>
@@ -29,7 +29,7 @@ function About() {
       </section>
 
       {/* About Section */}
-      <section className="max-w-4xl mx-auto mt-16 text-center p-6">
+      <section className="max-w-4xl mx-auto mt-16 text-center md:p-6">
         <h2 className="text-3xl font-semibold mb-4">About Us</h2>
         <p className="text-lg mb-8">
           We are a dedicated platform aiming to connect blood donors with those
