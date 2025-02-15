@@ -136,11 +136,19 @@ const run = async () => {
     });
 
     app.get("/donors", async (req, res) => {
-      const donors = await donorCollection.find().toArray();
-      const filterDonors = donors.filter(
-        (current) => current.email !== req.query?.email
-      );
-      res.send({ message: "successful", filterDonors });
+      const donors = await userCollection.find({ isDonor: true }).toArray();
+      res.send({ message: "successful", donors });
+    });
+    app.patch("/update", async (req, res) => {
+      const query = req.query;
+      // console.log(query.donor === "true" ? true : false );
+      if (query?.donor) {
+        const result = await userCollection.updateOne(
+          { email: query.email },
+          { $set: { isDonor: query.donor === "true" ? true : false } }
+        );
+        res.send({ message: "successful", result });
+      }
     });
   } finally {
     // console.log('')

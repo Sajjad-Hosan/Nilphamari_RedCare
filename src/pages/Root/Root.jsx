@@ -3,8 +3,8 @@ import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import SettingDrop from "../../components/SettingDrop/SettingDrop";
 import LogoutModal from "../../components/Shared/LogoutModal";
-import Alerts from "../../components/Shared/Alerts";
 import WelcomeAlert from "../../components/Shared/WelcomeAlert";
+import { ToastContainer } from "react-toastify";
 const Root = () => {
   return (
     <div className="px-4 pt-2 raleway">
@@ -15,7 +15,14 @@ const Root = () => {
       {/*  */}
       <WelcomeAlert />
       <LogoutModal />
-      {/* <Alerts /> */}
+      <ToastContainer
+            position="bottom-left"
+            autoClose={3000}
+            hideProgressBar={false}
+            theme="light"
+            closeButton={false}
+            
+          />
     </div>
   );
 };

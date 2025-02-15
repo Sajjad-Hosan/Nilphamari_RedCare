@@ -20,7 +20,7 @@ const useDonors = () => {
       const res = await axiosPublic.get(
         `/donors?email=${user.email}&cursor=${pageParam}`
       );
-      return res.data;
+      return res.data.pages;
     },
     initialPageParam: 0,
     getNextPageParam: (lastPage, pages) => lastPage.nextCursor,

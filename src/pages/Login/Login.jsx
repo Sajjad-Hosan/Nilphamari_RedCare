@@ -1,13 +1,14 @@
 import { AiOutlineHome } from "react-icons/ai";
 import { CgLogIn } from "react-icons/cg";
 import { FaFacebook, FaGithub, FaGoogle, FaTwitter } from "react-icons/fa6";
-import { LuKeyRound, LuUserPlus } from "react-icons/lu";
+import { LuKeyRound, LuMailWarning, LuUserPlus } from "react-icons/lu";
 import { MdOutlineAlternateEmail } from "react-icons/md";
 import image from "../../assets/login.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { useForm } from "react-hook-form";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const { handleFirebaseLogin } = useAuth();
@@ -17,15 +18,18 @@ const Login = () => {
   const { state } = useLocation();
 
   const handleLogin = (e) => {
-    handleFirebaseLogin(e.email, e.password).then(async (res) => {
-      const data = {
-        email: e.email,
-        lastSignInTime: res.user?.metadata?.lastSignInTime,
-      };
-      const result = await axiosPublic.post("/login", data);
-      console.log(result);
-      navigate(state || "/");
-    });
+    handleFirebaseLogin(e.email, e.password)
+      .then(async (res) => {
+        const data = {
+          email: e.email,
+          lastSignInTime: res.user?.metadata?.lastSignInTime,
+        };
+        const result = await axiosPublic.post("/login", data);
+        navigate(state || "/");
+      })
+      .catch((ee) => {
+          toast.error("Please check your email or password");        
+      });
   };
 
   return (
@@ -108,6 +112,7 @@ const Login = () => {
               </p>
               <div className="mt-4 flex items-center gap-4 justify-center">
                 <button
+                  onClick={() => {}}
                   className="btn btn-ghost flex tooltip"
                   data-tip="Google"
                 >
