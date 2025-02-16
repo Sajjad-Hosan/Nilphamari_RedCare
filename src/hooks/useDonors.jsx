@@ -5,8 +5,9 @@ import useAuth from "./useAuth";
 const useDonors = () => {
   const axiosPublic = useAxiosPublic();
   const { user } = useAuth();
+
   const {
-    data = [],
+    data,
     error,
     fetchNextPage,
     hasNextPage,
@@ -16,18 +17,21 @@ const useDonors = () => {
     refetch,
   } = useInfiniteQuery({
     queryKey: ["donors"],
-    queryFn: async ({ pageParam }) => {
-      const res = await axiosPublic.get(
-        `/donors?email=${user.email}&cursor=${pageParam}`
+    queryFn: async ({ pageParam = null }) => {
+      const res = await axiosPublic.post(
+        `/donors?email=${user?.email}&cursor=${pageParam}&limit=10`
       );
-      return res.data.pages;
+      return res.data; // Directly return API response
     },
-    initialPageParam: 0,
-    getNextPageParam: (lastPage, pages) => lastPage.nextCursor,
+    initialPageParam: null, // Start with null cursor
+    getNextPageParam: (lastPage) => {
+      return lastPage.nextCursor || null; // Use nextCursor for pagination
+    },
   });
 
   return {
     data,
+    donors: data?.pages?.flatMap((page) => page.donors) || [], // Flatten donors list
     error,
     fetchNextPage,
     hasNextPage,

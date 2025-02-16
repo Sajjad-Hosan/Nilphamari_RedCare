@@ -7,7 +7,7 @@ const SettingDrop = () => {
       {/* change popover-1 and --acnhor-1 names. Use unique names for each dropdown */}
       {/* For TSX uncomment the commented types below */}
       <button
-        className="btn btn-circle btn-neutral flex tooltip fixed bottom-5 right-5"
+        className="btn btn-circle btn-neutral flex tooltip tooltip-left fixed bottom-5 right-5"
         data-tip="Setting"
         popoverTarget="popover-3"
         style={{ anchorName: "--anchor-3" } /* as React.CSSProperties */}

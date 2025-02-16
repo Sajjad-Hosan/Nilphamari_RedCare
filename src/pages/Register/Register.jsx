@@ -43,7 +43,7 @@ const Register = () => {
           comments: [],
           blocks: [],
           messages: [],
-          isDonor: false,
+          isDonor: true,
           accept_all_terms_conditions: true,
         };
         const res = await AxiosPublic.post("/register", userData);

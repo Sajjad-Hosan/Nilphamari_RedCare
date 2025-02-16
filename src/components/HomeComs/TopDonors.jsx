@@ -43,7 +43,7 @@ const TopDonors = () => {
             ))}
           </div>
         ) : (
-          <EmptyCard />
+          <EmptyCard heading="No Top Donors "/>
         )}
       </div>
       <div className="mt-10 flex justify-end gap-5">

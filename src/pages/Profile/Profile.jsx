@@ -6,7 +6,7 @@ import {
   MdOutlineLocationOn,
   MdOutlinePhone,
 } from "react-icons/md";
-import { TbFileExport, TbLogout2 } from "react-icons/tb";
+import { TbBrandStorytel, TbFileExport, TbLogout2 } from "react-icons/tb";
 import ProfileDropdown from "../../components/ProfileCom/ProfileDropdown";
 import useAuth from "../../hooks/useAuth";
 import { FaCheck, FaXmark } from "react-icons/fa6";
@@ -14,6 +14,7 @@ import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import MoreAboutModal from "./MoreAboutModal";
+import StoryModal from "../../components/ProfileCom/StoryModal";
 
 const ProfilePage = () => {
   const { mgUser } = useAuth();
@@ -48,6 +49,7 @@ const ProfilePage = () => {
     weight,
   } = mgUser;
   const [donor, setDonor] = useState(isDonor);
+  const [count, setCount] = useState(0);
 
   const handleDonor = async (status) => {
     const res = await axiosPublic.patch(
@@ -59,6 +61,7 @@ const ProfilePage = () => {
   return (
     <>
       <MoreAboutModal />
+      <StoryModal />
       {/*  */}
       <div className="max-w-6xl mx-auto">
         <div className="card p-4 mt-4">
@@ -96,6 +99,30 @@ const ProfilePage = () => {
               >
                 <TbFileExport className="text-lg" />
               </button>
+              {count >= 6 ? (
+                <button
+                  onClick={() =>
+                    document.getElementById("story_modal").showModal()
+                  }
+                  className="btn btn-ghost btn-circle flex tooltip"
+                  data-tip="Add Story"
+                >
+                  <TbBrandStorytel className="text-lg" />
+                </button>
+              ) : (
+                <button
+                  onClick={() =>
+                    toast.warning(
+                      "You have to at least donated 6 times for use this!"
+                    )
+                  }
+                  className="btn btn-ghost btn-circle flex tooltip"
+                  data-tip="Add Story"
+                >
+                  <TbBrandStorytel className="text-lg" />
+                </button>
+              )}
+
               <ProfileDropdown />
             </div>
           </div>

@@ -38,6 +38,10 @@ const run = async () => {
     // mongoDB collection names
     const userCollection = client.db("blood_donation").collection("users");
     const donorCollection = client.db("blood_donation").collection("donors");
+    const messageCollection = client
+      .db("blood_donation")
+      .collection("messages");
+    const storyCollection = client.db("blood_donation").collection("stories");
 
     // apis
     app.post("/jwt", async (req, res) => {
@@ -135,8 +139,14 @@ const run = async () => {
       res.send({ message: "successful!", result, result2 });
     });
 
-    app.get("/donors", async (req, res) => {
-      const donors = await userCollection.find({ isDonor: true }).toArray();
+    app.post("/donors", async (req, res) => {
+      const page = req.query.cursor;
+      const limit = 10;
+      const donors = await userCollection
+        .find()
+        .limit(limit)
+        .skip(page * limit)
+        .toArray();
       res.send({ message: "successful", donors });
     });
     app.patch("/update", async (req, res) => {
@@ -149,6 +159,33 @@ const run = async () => {
         );
         res.send({ message: "successful", result });
       }
+    });
+
+    // success story related api
+    app.post("/story-add", async (req, res) => {
+      const body = req.body;
+      const exist = await storyCollection.findOne({ email: body.email });
+      if (exist) {
+        return res.send({ message: "the user story already exist!" });
+      }
+      const result = await storyCollection.insertOne(body);
+      res.send({ message: "successful", result });
+    });
+
+    // Message related apis
+    app.get("/message", async (req, res) => {
+      const chatEmail = req.query?.chatEmail;
+      const userEmail = req.query?.userEmail;
+
+      const result = await messageCollection
+        .find({
+          $or: [
+            { sender: chatEmail, receiver: userEmail },
+            { sender: userEmail, receiver: chatEmail },
+          ],
+        })
+        .toArray();
+      res.send({ message: "successful", result });
     });
   } finally {
     // console.log('')
