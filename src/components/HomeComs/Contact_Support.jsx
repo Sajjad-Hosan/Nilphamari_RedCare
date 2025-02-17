@@ -34,14 +34,14 @@ const Contact_Support = () => {
       <div className="flex flex-col lg:flex-row justify-between gap-10 ">
         <div className="flex flex-col gap-6 lg:w-[50%]">
           <div className="border border-gray-200 p-10 rounded-lg space-y-2">
-            <h3 className="text-xl font-semibold">আমাদের অবস্থান</h3>
-            <p className="text-sm text-gray-600">নীলফামারী সদর, রংপুর</p>
+            <h3 className="text-xl font-semibold">Our Location</h3>
+            <p className="text-sm text-gray-600"> Nilphamari Sadar, Rangpur</p>
           </div>
 
           <div className="border border-gray-200 p-10 rounded-lg space-y-2">
-            <h3 className="text-xl font-semibold">জরুরি যোগাযোগ</h3>
-            <p className="text-sm text-gray-600">হেল্পলাইন: ০১৭*******</p>
-            <p className="text-sm text-gray-600">ইমেইল: support@example.com</p>
+            <h3 className="text-xl font-semibold">Emergency Contact</h3>
+            <p className="text-sm text-gray-600">Helpline: 017*******</p>
+            <p className="text-sm text-gray-600">Email: support@example.com</p>
           </div>
         </div>
 

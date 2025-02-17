@@ -1,44 +1,40 @@
-import { useInfiniteQuery } from "@tanstack/react-query";
+import {
+  keepPreviousData,
+  useInfiniteQuery,
+  useQuery,
+} from "@tanstack/react-query";
 import useAxiosPublic from "./useAxiosPublic";
 import useAuth from "./useAuth";
+import { useState } from "react";
 
 const useDonors = () => {
   const axiosPublic = useAxiosPublic();
   const { user } = useAuth();
-
-  const {
-    data,
-    error,
-    fetchNextPage,
-    hasNextPage,
-    isFetching,
-    isFetchingNextPage,
-    status,
-    refetch,
-  } = useInfiniteQuery({
-    queryKey: ["donors"],
-    queryFn: async ({ pageParam = null }) => {
-      const res = await axiosPublic.post(
-        `/donors?email=${user?.email}&cursor=${pageParam}&limit=10`
-      );
-      return res.data; // Directly return API response
-    },
-    initialPageParam: null, // Start with null cursor
-    getNextPageParam: (lastPage) => {
-      return lastPage.nextCursor || null; // Use nextCursor for pagination
-    },
-  });
+  const [page, setPage] = useState(0);
+  const { data, error, isPending, isError, isFetching, isPlaceholderData } =
+    useQuery({
+      queryKey: ["donors", page],
+      // initialPageParam: 0, // Start with null cursor
+      queryFn: async () => {
+        const res = await axiosPublic.post(
+          `/donors?email=${user?.email}&cursor=${page}&limit=10`
+        );
+        return res.data; // Directly return API response
+      },
+      placeholderData: keepPreviousData,
+    });
 
   return {
     data,
-    donors: data?.pages?.flatMap((page) => page.donors) || [], // Flatten donors list
+    donors: data?.donors,
+    count: data?.count,
     error,
-    fetchNextPage,
-    hasNextPage,
+    isPending,
+    isError,
     isFetching,
-    isFetchingNextPage,
-    status,
-    refetch,
+    isPlaceholderData,
+    page,
+    setPage,
   };
 };
 

@@ -35,7 +35,7 @@ const DonationNeeds = () => {
         <div className="flex flex-col">
           {donors?.length > 0 ? (
             <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-              {donors.map((info, i) => (
+              {donors.slice(0,6).map((info, i) => (
                 <Card key={i} data={info} border="orange" type="need" />
               ))}
             </div>

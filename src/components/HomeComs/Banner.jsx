@@ -2,15 +2,19 @@ import { FaUsersViewfinder } from "react-icons/fa6";
 import QuickFindModal from "./QuickFindModal";
 import { Link } from "react-router-dom";
 import { MdOutlineMedicalInformation } from "react-icons/md";
+import useAuth from "../../hooks/useAuth";
 
 const Banner = () => {
+  const { handleDevelopement } = useAuth();
   return (
     <>
       <QuickFindModal />
       <div className="hero bg-base-100 h-[35rem]">
         <div className="hero-content text-center">
           <div className="max-w-3xl">
-            <h1 className="text-5xl md:text-6xl font-semibold">Assalamu Alaikum,</h1>
+            <h1 className="text-5xl md:text-6xl font-semibold">
+              Assalamu Alaikum,
+            </h1>
             <p className="mt-5 text-sm md:text-md">
               Welcome to{" "}
               <span className="text-bold text-orange-500 text-xl">
@@ -38,7 +42,12 @@ const Banner = () => {
               >
                 Quick Find Donors <FaUsersViewfinder className="text-lg" />
               </button>
-              <button className="btn btn-neutral px-8">Donate Now</button>
+              <button
+                className="btn btn-neutral px-8"
+                onClick={handleDevelopement}
+              >
+                Donate Now
+              </button>
               <Link to={"/new-donor"} className="btn btn-outline" hidden={true}>
                 Be a Donor <MdOutlineMedicalInformation className="text-lg" />
               </Link>

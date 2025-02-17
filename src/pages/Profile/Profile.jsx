@@ -17,7 +17,7 @@ import MoreAboutModal from "./MoreAboutModal";
 import StoryModal from "../../components/ProfileCom/StoryModal";
 
 const ProfilePage = () => {
-  const { mgUser } = useAuth();
+  const { mgUser, handleDevelopement } = useAuth();
   const axiosPublic = useAxiosPublic();
   const {
     _id,
@@ -90,12 +90,14 @@ const ProfilePage = () => {
               <button
                 className="btn btn-ghost btn-circle flex tooltip"
                 data-tip="Edit Profile"
+                onClick={handleDevelopement}
               >
                 <AiOutlineEdit className="text-lg" />{" "}
               </button>
               <button
                 className="btn btn-ghost btn-circle flex tooltip"
                 data-tip="Export data"
+                onClick={handleDevelopement}
               >
                 <TbFileExport className="text-lg" />
               </button>

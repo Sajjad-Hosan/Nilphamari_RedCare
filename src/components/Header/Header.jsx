@@ -57,7 +57,7 @@ const MenuArrays = [
 ];
 
 const Header = () => {
-  const { user } = useAuth();
+  const { user, handleDevelopement } = useAuth();
   const handleSearchResult = (e) => {
     e.preventDefault();
 
@@ -157,6 +157,7 @@ const Header = () => {
           <button
             className="btn btn-ghost btn-circle flex tooltip tooltip-bottom"
             data-tip="Dashboard"
+            onClick={handleDevelopement}
           >
             <LuLayoutDashboard className="text-lg" />
           </button>

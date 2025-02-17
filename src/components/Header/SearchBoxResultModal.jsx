@@ -28,7 +28,7 @@ const SearchBoxResultModal = () => {
                   ))}
                 </div>
               ) : (
-                <EmptyCard heading="no result found" />
+                <EmptyCard heading="Under developement" />
               )}
             </div>
           </div>

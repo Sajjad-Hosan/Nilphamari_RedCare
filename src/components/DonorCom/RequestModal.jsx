@@ -6,8 +6,6 @@ const RequestModal = () => {
   const handleReq = () => {};
   return (
     <>
-      {/* You can open the modal using document.getElementById('ID').showModal() method */}
-      <button className="btn">open modal</button>
       <dialog id="request_modal" className="modal">
         <div className="modal-box w-11/12 max-w-lg">
           <div className="flex flex-col items-center justify-center gap-3 p-9">

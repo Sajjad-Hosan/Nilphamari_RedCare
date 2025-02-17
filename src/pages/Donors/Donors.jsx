@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import ChatsModal from "../../components/DonorCom/ChatsModal";
 import useAuth from "../../hooks/useAuth";
 import RequestModal from "../../components/DonorCom/RequestModal";
+import { useInView } from "react-intersection-observer";
 
 const DonorCard = ({ data, setChatUser }) => {
   const { user } = useAuth();
@@ -122,16 +123,11 @@ const DonorCard = ({ data, setChatUser }) => {
 };
 
 const Donors = () => {
-  const { donors } = useDonors();
+  const { data, donors, setPage, page, isFetching, count } = useDonors();
+  const pages = Math.ceil(count / 10);
+  console.log(pages);
   const isDonor = true;
-  const [loading, setLoading] = useState(false);
   const [chatUser, setChatUser] = useState("");
-  useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000); // simulate delay for loading data
-  }, []);
 
   return (
     <>
@@ -139,6 +135,7 @@ const Donors = () => {
       <RequestModal />
       {/*  */}
       <div className="px-4">
+          <p className="text-sm font-semibold text-right mb-3">You have {count} Person</p>
         <div className="flex justify-between items-center">
           <h2 className="text-4xl font-semibold">Donors</h2>
           <div className="flex items-center gap-4">
@@ -204,24 +201,50 @@ const Donors = () => {
           </div>
         </div>
         <div className="mt-10">
-          {donors.length > 0 ? (
+          {donors?.length > 0 ? (
             <>
               <div className="grid grid-cols-2 gap-5">
-                {donors.map((info, i) => (
+                {donors?.map((info, i) => (
                   <DonorCard key={i} data={info} setChatUser={setChatUser} />
                 ))}
               </div>
               <div className="flex items-center justify-center mt-16">
-                <button
-                  className="btn btn-neutral px-8"
-                  onClick={() => setLoading(!loading)}
-                >
-                  {loading ? (
-                    <span className="loading loading-dots loading-xs"></span>
-                  ) : (
-                    "Load More"
-                  )}
-                </button>
+                {page === 0 ? (
+                  <button
+                    className="btn btn-neutral px-8"
+                    onClick={() => setPage((p) => p + 1)}
+                    disabled={(pages === page + 1 && true) || isFetching}
+                  >
+                    {isFetching ? (
+                      <span className="loading loading-dots loading-xs"></span>
+                    ) : (
+                      "Load More"
+                    )}
+                  </button>
+                ) : (
+                  <div className="space-x-5">
+                    <button
+                      className="btn btn-neutral px-8"
+                      onClick={() => setPage((p) => p - 1)}
+                      disabled={pages < page && true}
+                    >
+                      Prev
+                    </button>
+                    <button
+                      className={`btn btn-neutral px-8 ${
+                        pages === page + 1 ? "hidden" : ""
+                      }`}
+                      onClick={() => setPage((p) => p + 1)}
+                      disabled={(pages === page + 1 && true) || isFetching}
+                    >
+                      {isFetching ? (
+                        <span className="loading loading-dots loading-xs"></span>
+                      ) : (
+                        "Load More"
+                      )}
+                    </button>
+                  </div>
+                )}
               </div>
             </>
           ) : (

@@ -4,20 +4,19 @@ const HowItWorks = () => {
   const steps = [
     {
       icon: <FaSearch size={40} className="text-red-500" />,
-      title: "রক্তদাতা খুঁজুন",
+      title: "Find a blood donor",
       description:
-        "আপনার প্রয়োজন অনুযায়ী ব্লাড গ্রুপ ও লোকেশন অনুযায়ী ডোনার খুঁজুন।",
+        "Find donors according to your needs, blood type and location.",
     },
     {
       icon: <FaPhoneAlt size={40} className="text-blue-500" />,
-      title: "তাদের সাথে যোগাযোগ করুন",
-      description: "সরাসরি ডোনারের সাথে কল বা মেসেজের মাধ্যমে যোগাযোগ করুন।",
+      title: "Contact Them",
+      description: "Contact the donor directly via call or message.",
     },
     {
       icon: <FaHandsHelping size={40} className="text-green-500" />,
-      title: "সাহায্য পান",
-      description:
-        "ডোনার আপনাকে সহায়তা করবে এবং আপনার প্রয়োজনীয় রক্ত সরবরাহ করবে।",
+      title: "Get Help",
+      description: "Donor will help you and provide the blood you need.",
     },
   ];
 

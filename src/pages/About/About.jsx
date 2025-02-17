@@ -1,8 +1,11 @@
 import image from "../../assets/hands.png";
 import { Link } from "react-router-dom";
 import { MdOutlineMedicalInformation } from "react-icons/md";
+import useAuth from "../../hooks/useAuth";
+import { toast } from "react-toastify";
 
 function About() {
+  const { mgUser } = useAuth();
   return (
     <div className="p-10">
       {/* Hero Section */}
@@ -14,7 +17,10 @@ function About() {
           className="object-contain mx-auto mb-2"
         />
         <h1 className="text-lg md:text-3xl font-semibold mb-4">
-          Welcome to <br /> <span className=" mt-2 text-3xl md:text-5xl font-bold dancing">Nilphamari RedCare</span>{" "}
+          Welcome to <br />{" "}
+          <span className=" mt-2 text-3xl md:text-5xl font-bold dancing">
+            Nilphamari RedCare
+          </span>{" "}
         </h1>
         <p className="text-xl mb-6">
           Join us in making a difference by donating blood and saving lives.
@@ -112,7 +118,13 @@ function About() {
         </p>
         <div className="flex justify-end mt-6 gap-4">
           <button className="btn btn-neutral px-8">Donate Now</button>
-          <Link to={"/new-donor"} className="btn btn-outline ">
+          <Link
+            to={mgUser.isDonor ? "#" : "/set-profile"}
+            className="btn btn-outline"
+            onClick={() => {
+              mgUser?.isDonor && toast.warn("You are already an Donor!");
+            }}
+          >
             Be a Donor <MdOutlineMedicalInformation className="text-lg" />
           </Link>
         </div>

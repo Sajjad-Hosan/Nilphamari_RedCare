@@ -1,7 +1,14 @@
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { HiXMark } from "react-icons/hi2";
+import useAuth from "../../hooks/useAuth";
 
 const QuickFindModal = () => {
+  const { handleDevelopement } = useAuth();
+
+  const handleQuickFind = (e) => {
+    e.preventDefault();
+    handleDevelopement();
+  };
   return (
     <>
       <dialog id="quickFind_modal" className="modal">
@@ -18,7 +25,10 @@ const QuickFindModal = () => {
             </form>
           </div>
           <div>
-            <form className="flex flex-col items-center gap-3 mt-4 mb-6 p-6">
+            <form
+              className="flex flex-col items-center gap-3 mt-4 mb-6 p-6"
+              onSubmit={handleQuickFind}
+            >
               <div className="grid grid-cols-2 gap-2 w-full">
                 <input
                   type="text"

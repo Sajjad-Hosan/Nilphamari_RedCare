@@ -1,5 +1,9 @@
 import { FaPersonCircleCheck, FaUsersViewfinder } from "react-icons/fa6";
+import { MdOutlineMedicalInformation } from "react-icons/md";
 import { TbDatabaseExclamation } from "react-icons/tb";
+import { Link } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import { toast } from "react-toastify";
 
 const EmptyStoryCard = () => {
   return (
@@ -19,6 +23,7 @@ const EmptyStoryCard = () => {
 };
 
 const SuccessStories = () => {
+  const { mgUser } = useAuth();
   const stories = [
     // {
     //   name: "Rahim Uddin",
@@ -112,12 +117,18 @@ const SuccessStories = () => {
         >
           <FaUsersViewfinder className="text-lg" />
         </button>
-        <button
-          className="btn btn-neutral flex px-8 tooltip"
-          data-tip="Be a donor"
+        <Link
+          to={mgUser.isDonor ? "#" : "/new-donor"}
+          className="btn btn-neutral flex tooltip px-8"
+          data-tip="Be a Donor"
+          onClick={() => {
+            if (mgUser.isDonor) {
+              toast.warn("You are already a donor");
+            }
+          }}
         >
-          <FaPersonCircleCheck className="text-lg" />
-        </button>
+          <MdOutlineMedicalInformation className="text-lg" />
+        </Link>
       </div>
     </div>
   );

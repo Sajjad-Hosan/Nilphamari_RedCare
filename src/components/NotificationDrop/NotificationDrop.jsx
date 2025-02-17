@@ -43,11 +43,12 @@ const NotiOptions = () => {
 };
 
 const NotificationDrop = () => {
+  const array = [...Array(0).keys()];
   return (
     <div>
       <button
         className="btn btn-ghost btn-circle flex tooltip tooltip-bottom"
-        data-tip='Notifications'
+        data-tip="Notifications"
         popoverTarget="popover-1"
         style={{ anchorName: "--anchor-1" } /* as React.CSSProperties */}
       >
@@ -83,21 +84,34 @@ const NotificationDrop = () => {
           </p>
           <NotiOptions />
         </div>
-        <div className="overflow-scroll flex flex-col gap-3 h-[20rem] mt-4">
-          {[...Array(19).keys()].map((i) => (
-            <div key={i} className="p-3 card transition-all duration-250 hover:bg-gray-400 cursor-pointer">
-              <div className="flex justify-between">
-                <h3 className="text-sm font-semibold">
-                  New message from John Doe
-                </h3>
-                <span className="text-gray-500 text-xs">5 minutes ago</span>
-              </div>
-              <p className="text-xs text-gray-600">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              </p>
-              {/* </div> */}
+        <div className="flex flex-col gap-3 h-[20rem] mt-4 items-center justify-center">
+          {array.length > 0 ? (
+            <div className="overflow-scroll">
+              {array.map((i) => (
+                <div
+                  key={i}
+                  className="p-3 card transition-all duration-250 hover:bg-gray-400 cursor-pointer"
+                >
+                  <div className="flex justify-between">
+                    <h3 className="text-sm font-semibold">
+                      New message from John Doe
+                    </h3>
+                    <span className="text-gray-500 text-xs">5 minutes ago</span>
+                  </div>
+                  <p className="text-xs text-gray-600">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  </p>
+                  {/* </div> */}
+                </div>
+              ))}
             </div>
-          ))}
+          ) : (
+            <div className="card p-2">
+              <p className="text-center text-gray-600 font-semibold">
+                No notifications yet.
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </div>

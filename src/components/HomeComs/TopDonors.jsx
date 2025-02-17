@@ -3,9 +3,12 @@ import Card from "../Shared/Card";
 import EmptyCard from "../EmptyCard/EmptyCard";
 import { MdOutlineMedicalInformation } from "react-icons/md";
 import { Link } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import { toast } from "react-toastify";
 
 const TopDonors = () => {
   const arrays = [...Array(0).keys()];
+  const { mgUser } = useAuth();
   return (
     <div className="flex flex-col gap-3 p-6 mt-24">
       <div className="flex justify-between items-center gap-2 px-4">
@@ -43,7 +46,7 @@ const TopDonors = () => {
             ))}
           </div>
         ) : (
-          <EmptyCard heading="No Top Donors "/>
+          <EmptyCard heading="No Top Donors " />
         )}
       </div>
       <div className="mt-10 flex justify-end gap-5">
@@ -55,9 +58,14 @@ const TopDonors = () => {
           <FaUsersViewfinder className="text-lg" />
         </button>
         <Link
-          to={"/new-donor"}
+          to={mgUser.isDonor ? "#" : "/new-donor"}
           className="btn btn-neutral flex tooltip px-8"
           data-tip="Be a Donor"
+          onClick={() => {
+            if (mgUser.isDonor) {
+              toast.warn("You are already a donor");
+            }
+          }}
         >
           <MdOutlineMedicalInformation className="text-lg" />
         </Link>

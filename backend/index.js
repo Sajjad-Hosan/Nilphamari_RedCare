@@ -5,10 +5,10 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
 const { MongoClient, ServerApiVersion } = require("mongodb");
-const { version } = require("react");
 
 const port = 3000 || process.env.PORT;
-const uri = "mongodb://localhost:27017";
+// const uri = "mongodb://localhost:27017";
+const uri = `mongodb+srv://${process.env.MONGO_UU}:${process.env.MONGO_PP}@cluster0.aeratuu.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 const today = new Date();
 
 app.use(express.json());
@@ -140,14 +140,23 @@ const run = async () => {
     });
 
     app.post("/donors", async (req, res) => {
-      const page = req.query.cursor;
-      const limit = 10;
+      const page = +req.query.cursor;
+      const limit = +req.query.limit + 1;
+      const count = await userCollection.estimatedDocumentCount();
+
+      console.log("page", page);
       const donors = await userCollection
         .find()
-        .limit(limit)
         .skip(page * limit)
+        .limit(limit)
         .toArray();
-      res.send({ message: "successful", donors });
+
+      res.send({
+        message: "successful",
+        donors,
+        page: page,
+        count,
+      });
     });
     app.patch("/update", async (req, res) => {
       const query = req.query;

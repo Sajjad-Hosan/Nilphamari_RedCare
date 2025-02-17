@@ -4,7 +4,7 @@ import { FaXmark } from "react-icons/fa6";
 
 const MoreAboutModal = () => {
   const [tab, setTab] = useState(0);
-  const arrays = [...Array(18).keys()];
+  const arrays = [...Array(0).keys()];
   return (
     <>
       <dialog id="more_about_modal" className="modal">
@@ -105,23 +105,35 @@ const MoreAboutModal = () => {
               {tab == 1 && (
                 <div>
                   <p className="text-sm font-semibold text-right mb-3">
-                    You have donated 10 People
+                    You have donated {arrays.length} People
                   </p>
-                  <div className="overflow-scroll grid lg:grid-cols-3 gap-3 p-3">
-                    {arrays.map((i) => (
-                      <div
-                        key={i}
-                        className="card border flex-row items-center justify-between gap-3 px-5 py-3 transition-all duration-100 cursor-pointer hover:-translate-1 hover:scale-95"
-                      >
-                        <div className="flex items-center gap-3">
-                          <img src="/logo.png" alt="" width={40} />
-                          <h1 className="text-sm font-semibold">
-                            Sajjad Hsoan
-                          </h1>
-                        </div>
-                        <button className="btn btn-sm btn-neutral">View</button>
+                  <div className="p-3">
+                    {arrays.length > 0 ? (
+                      <div className="overflow-scroll grid lg:grid-cols-3 gap-3 ">
+                        {arrays.map((i) => (
+                          <div
+                            key={i}
+                            className="card border flex-row items-center justify-between gap-3 px-5 py-3 transition-all duration-100 cursor-pointer hover:-translate-1 hover:scale-95"
+                          >
+                            <div className="flex items-center gap-3">
+                              <img src="/logo.png" alt="" width={40} />
+                              <h1 className="text-sm font-semibold">
+                                Sajjad Hsoan
+                              </h1>
+                            </div>
+                            <button className="btn btn-sm btn-neutral">
+                              View
+                            </button>
+                          </div>
+                        ))}
                       </div>
-                    ))}
+                    ) : (
+                      <div className="card p-3 mt-10">
+                        <p className="text-center text-sm font-semibold">
+                          No donations yet
+                        </p>
+                      </div>
+                    )}
                   </div>
                 </div>
               )}

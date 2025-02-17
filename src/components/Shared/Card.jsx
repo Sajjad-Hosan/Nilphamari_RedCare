@@ -1,6 +1,11 @@
 import { GrFormView } from "react-icons/gr";
-import { LuMessageCircle, LuSend } from "react-icons/lu";
-import { MdOutlineContacts, MdOutlineLocationOn } from "react-icons/md";
+import { LuMessageCircle, LuSend, LuUserRoundSearch } from "react-icons/lu";
+import {
+  MdOutlineAlternateEmail,
+  MdOutlineContacts,
+  MdOutlineLocationOn,
+  MdOutlinePhone,
+} from "react-icons/md";
 import { Link } from "react-router-dom";
 
 const Card = ({ data, border = "gray", type }) => {
@@ -81,22 +86,16 @@ const Card = ({ data, border = "gray", type }) => {
                       <p className="text-xs font-semibold mb-5">
                         Contact information
                       </p>
-                      <div className="space-y-3">
-                        <p className="text-xs font-semibold flex items-center gap-1">
-                          <MdOutlineLocationOn className="text-xl" />{" "}
-                          {"address"}
+                      <div className="space-y-3 px-1">
+                        <p className="text-sm font-semibold flex items-center gap-1">
+                          <LuUserRoundSearch className="text-xl" /> {userName}
                         </p>
-                        <p className="text-xs font-semibold flex items-center gap-1">
-                          <MdOutlineLocationOn className="text-xl" />{" "}
-                          {"address"}
+                        <p className="text-sm font-semibold flex items-center gap-1">
+                          <MdOutlineAlternateEmail className="text-xl" />{" "}
+                          {email}
                         </p>
-                        <p className="text-xs font-semibold flex items-center gap-1">
-                          <MdOutlineLocationOn className="text-xl" />{" "}
-                          {"address"}
-                        </p>
-                        <p className="text-xs font-semibold flex items-center gap-1">
-                          <MdOutlineLocationOn className="text-xl" />{" "}
-                          {"address"}
+                        <p className="text-xs font-semibold flex items-center gap-1 capitalize">
+                          <MdOutlineLocationOn className="text-xl" /> {address}
                         </p>
                       </div>
                     </div>

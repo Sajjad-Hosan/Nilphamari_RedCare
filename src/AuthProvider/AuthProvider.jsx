@@ -67,6 +67,10 @@ const AuthProvider = ({ children }) => {
     return signInWithPopup(auth, githubProvider);
   };
 
+  const handleDevelopement = () => {
+    document.getElementById("handle_developement").showModal();
+  };
+
   //   context values
   const values = {
     user,
@@ -78,6 +82,7 @@ const AuthProvider = ({ children }) => {
     handleFirebaseLogout,
     handleFirebaseGooglePopup,
     handleFirebaseGithubPopup,
+    handleDevelopement,
   };
   return (
     <CreateContext.Provider value={values}>{children}</CreateContext.Provider>

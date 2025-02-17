@@ -1,4 +1,5 @@
 import { FaDiscord, FaFacebook, FaTelegram, FaTwitter } from "react-icons/fa6";
+import useAuth from "../../hooks/useAuth";
 
 const socials = [
   {
@@ -24,6 +25,7 @@ const socials = [
 ];
 
 const Footer = () => {
+  const { handleDevelopement } = useAuth();
   return (
     <>
       <footer className="footer sm:footer-horizontal text-base-content p-10 mt-20">
@@ -49,32 +51,73 @@ const Footer = () => {
         </nav>
       </footer>
       <footer className="flex justify-between items-end border-t border-gray-300 px-10 py-4">
-        <nav className="grid-flow-col items-center">
-          <img
-            src="/public/logo.png"
-            width={100}
-            alt="Nilphamari RedCare"
-            className="object-contain"
-          />
-          <div className="flex flex-col gap-1">
-            <p className="font-semibold text-lg dancing">Nilphamari RedCare</p>
-            <p className="text-sm font-semibold">Support humanity from 2025</p>
-          </div>
-        </nav>
-        <nav className="md:justify-self-end">
-          <div className="grid grid-flow-col gap-4">
-            {socials.map(({ icon, url, name }, i) => (
-              <a
-                key={i}
-                href={url}
-                className="btn btn-sm btn-circle btn-ghost flex tooltip"
-                data-tip={name}
-              >
-                {icon}
-              </a>
-            ))}
-          </div>
-        </nav>
+        <div className="flex flex-col gap-4">
+          <nav className="grid-flow-col items-center">
+            <img
+              src="/public/logo.png"
+              width={80}
+              alt="Nilphamari RedCare"
+              className="object-contain"
+            />
+            <div className="flex flex-col gap-1">
+              <p className="font-semibold text-lg dancing">
+                Nilphamari RedCare
+              </p>
+              <p className="text-sm font-semibold">
+                Support humanity from 2025
+              </p>
+            </div>
+          </nav>
+          <nav className="md:justify-self-end">
+            <div className="grid grid-flow-col gap-4">
+              {socials.map(({ icon, url, name }, i) => (
+                <a
+                  key={i}
+                  href={url}
+                  className="btn btn-sm btn-circle btn-ghost flex tooltip"
+                  data-tip={name}
+                >
+                  {icon}
+                </a>
+              ))}
+            </div>
+          </nav>
+        </div>
+        <div>
+          <form
+            className="card p-5 gap-3"
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleDevelopement();
+            }}
+          >
+            <h6 className="text-lg font-semibold mb-3">
+              Contact or Feedback us
+            </h6>
+            <div className="grid md:grid-cols-2 gap-5">
+              <input
+                type="text"
+                className="input  w-full"
+                placeholder="Enter your name"
+              />
+              <input
+                type="email"
+                className="input w-full"
+                placeholder="Enter your email"
+              />
+            </div>
+            <textarea
+              name=""
+              id=""
+              className="textarea w-full"
+              rows={4}
+              placeholder="Message"
+            ></textarea>
+            <button className="px-7 btn btn-sm btn-neutral ml-auto mt-3">
+              Send
+            </button>
+          </form>
+        </div>
       </footer>
     </>
   );

@@ -26,7 +26,7 @@ const NoticeModal = () => {
   return (
     <>
       <dialog id="notice_modal" className="modal">
-        <div className="modal-box w-11/12 max-w-xl rounded-lg p-6">
+        <div className="modal-box w-11/12 max-w-xl rounded-lg p-6 z-30">
           <div className="text-center space-y-4 p-7">
             {showAlert ? (
               <>

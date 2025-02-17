@@ -7,9 +7,11 @@ import WelcomeAlert from "../../components/Shared/WelcomeAlert";
 import { ToastContainer } from "react-toastify";
 import NoticeModal from "../../components/Shared/NoticeModal";
 import { TbUserCode } from "react-icons/tb";
+import HandleDevelopement from "../../components/Shared/HandleDevelopement";
 const Root = () => {
   return (
     <div className="px-4 pt-2 raleway">
+      {/*  */}
       <Header />
       <Outlet />
       <Footer />
@@ -34,6 +36,7 @@ const Root = () => {
           <TbUserCode className="text-lg" />
         </button>
       </div>
+      <HandleDevelopement />
     </div>
   );
 };
