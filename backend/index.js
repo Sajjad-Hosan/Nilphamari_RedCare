@@ -39,6 +39,7 @@ const cookieOptions = {
 };
 const run = async () => {
   try {
+    console.log(process.env.MONGO_UU)
     // mongoDB collection names
     const userCollection = client.db("blood_donation").collection("users");
     const donorCollection = client.db("blood_donation").collection("donors");
