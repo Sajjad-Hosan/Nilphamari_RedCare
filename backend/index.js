@@ -15,7 +15,11 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://api.imgbb.com/1/upload"],
+    origin: [
+      "http://localhost:5173",
+      "https://api.imgbb.com/1/upload",
+      "https://nilphamari-red-care.vercel.app",
+    ],
     credentials: true,
   })
 );
